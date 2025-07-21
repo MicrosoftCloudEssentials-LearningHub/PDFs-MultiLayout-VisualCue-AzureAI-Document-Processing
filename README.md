@@ -12,7 +12,6 @@ Last updated: 2025-07-16
 
 -----------------------------
 
-
 > This solution is designed to be flexible and robust, supporting multiple versions of PDF documents with varying layouts—including those that use visual selection cues such as gray fills, hand-drawn Xs, checkmarks, or circles. By building on the [PDFs-Layouts-Processing-Fapp-DocIntelligence](https://github.com/MicrosoftCloudEssentials-LearningHub/PDFs-Layouts-Processing-Fapp-DocIntelligence) repository, we ensure that:
 
 - Table structure and text are extracted using Azure Document Intelligence (Layout model).
