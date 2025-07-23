@@ -338,6 +338,62 @@ def convert_pdf_to_images(pdf_bytes: bytes) -> List[Image.Image]:
     images = convert_from_bytes(pdf_bytes)
     return images
 
+def extract_skill_selections_from_table(table_data):
+    """
+    Given a table_data dict (as in your layout_data['pages'][x]['tables'][y]),
+    returns a list of dicts: [{"skill": ..., "selected": ...}, ...]
+    Assumes first column is skill name, columns 2-7 are options 0-5.
+    """
+    skills = []
+    for row in range(table_data["row_count"]):
+        skill_name = None
+        selected = None
+        for cell in table_data["cells"]:
+            if cell["row_index"] == row:
+                col = cell["column_index"]
+                content = cell["content"].replace("\n", " ").strip()
+                # First column is skill name
+                if col == 0:
+                    skill_name = content
+                # Columns 2-7 are options 0-5
+                elif 2 <= col <= 7:
+                    if ":selected:" in content:
+                        selected = col - 2  # 0-based
+        if skill_name and selected is not None:
+            skills.append({"skill": skill_name, "selected": selected})
+    return skills
+
+def infer_table_title(table_data, page_lines):
+    """
+    Try to infer the table title by looking for text above the table or in the first row/merged cells.
+    page_lines: list of all lines on the page (in order)
+    """
+    # Find the minimum row_index in the table (should be 0)
+    min_row = min(cell["row_index"] for cell in table_data["cells"])
+    # Get all cells in the first row
+    first_row_cells = [cell for cell in table_data["cells"] if cell["row_index"] == min_row]
+    # If any cell in the first row spans all columns, treat as title
+    for cell in first_row_cells:
+        if cell.get("column_span", 1) == table_data["column_count"] and cell["content"].strip():
+            return cell["content"].strip()
+    # Otherwise, look for a line above the first row that is not in the table
+    # Find the topmost cell's content
+    top_cell_content = None
+    if first_row_cells:
+        top_cell_content = first_row_cells[0]["content"].strip()
+    # Try to find a line above the table that is not the top cell content
+    if page_lines and top_cell_content:
+        for idx, line in enumerate(page_lines):
+            if line.strip() == top_cell_content and idx > 0:
+                # Return the previous line as the title
+                prev_line = page_lines[idx-1].strip()
+                if prev_line:
+                    return prev_line
+    # Fallback: use the top cell content if not empty
+    if top_cell_content:
+        return top_cell_content
+    return "Unknown Table"
+
 @app.blob_trigger(arg_name="myblob", path="pdfinvoices/{name}",
                   connection="invoicecontosostorage_STORAGE")
 def BlobTriggerContosoPDFLayoutsDocIntelligence(myblob: func.InputStream) -> None:
@@ -398,3 +454,53 @@ def BlobTriggerContosoPDFLayoutsDocIntelligence(myblob: func.InputStream) -> Non
         logging.info("Successfully saved layout data to Cosmos DB.")
     except Exception as e:
         logging.error(f"Error saving layout data to Cosmos DB: {e}")
+
+    # For each table, infer the title, create both DataFrame-like and summary JSON, log both, and save only the summary JSON
+    for page in layout_data["pages"]:
+        page_lines = page.get("lines", [])
+        for table in page["tables"]:
+            # --- Table Title Inference ---
+            table_title = infer_table_title(table, page_lines)
+
+            # --- DataFrame-like JSON ---
+            # Build a 2D array of cell contents
+            df_like = [[None for _ in range(table["column_count"])] for _ in range(table["row_count"]) ]
+            for cell in table["cells"]:
+                r, c = cell["row_index"], cell["column_index"]
+                df_like[r][c] = cell["content"].strip()
+            df_json = {
+                "table_title": table_title,
+                "data": df_like
+            }
+
+            # --- Pretty-print table as grid ---
+            def pretty_print_table(table_title, df_like):
+                # Find max width for each column
+                if not df_like or not df_like[0]:
+                    return "(Empty table)"
+                col_widths = [max(len(str(row[c])) if row[c] is not None else 0 for row in df_like) for c in range(len(df_like[0]))]
+                lines = []
+                lines.append(f"Table: {table_title}")
+                border = "+" + "+".join("-" * (w+2) for w in col_widths) + "+"
+                lines.append(border)
+                for i, row in enumerate(df_like):
+                    row_str = "|" + "|".join(f" {str(cell) if cell is not None else '' :<{col_widths[j]}} " for j, cell in enumerate(row)) + "|"
+                    lines.append(row_str)
+                    lines.append(border)
+                return "\n".join(lines)
+
+            pretty_table_str = pretty_print_table(table_title, df_like)
+            logging.info(f"\n{pretty_table_str}")
+
+            # --- Summary JSON ---
+            skill_selections = extract_skill_selections_from_table(table)
+            summary = {
+                "table_title": table_title,
+                "skills": skill_selections
+            }
+
+            # Log both outputs for user inspection
+            logging.info(f"Table DataFrame-like JSON: {json.dumps(df_json, indent=2)}")
+            logging.info(f"Table summary JSON: {json.dumps(summary, indent=2)}")
+            # Only save the summary JSON if needed (e.g., to Cosmos DB or elsewhere)
+            # (Current implementation saves only the main layout_data to Cosmos DB)
