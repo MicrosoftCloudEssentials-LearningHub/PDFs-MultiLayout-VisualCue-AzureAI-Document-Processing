@@ -1,6 +1,6 @@
 # Sample values 
 subscription_id     = ""                                        # "your-subscription_id"
-resource_group_name = "RG-PDFLayout-Processing-DocIntelligence" # "your-resource-group-name"
+resource_group_name = "RG-PDFLayoutVisualCue-ProcessingDocIntelligence" # "your-resource-group-name"
 location            = "West US"                                 # "your-location"
 # Storage Account
 storage_account_name         = "storageaccbrownpdfix2" # "your-storage-account-name"
