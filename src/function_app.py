@@ -2,16 +2,15 @@ import logging
 import azure.functions as func
 from azure.ai.formrecognizer import DocumentAnalysisClient, AnalyzeResult
 from azure.core.credentials import AzureKeyCredential
-from azure.cosmos import CosmosClient, PartitionKey, exceptions, ContainerProxy
+from azure.cosmos import CosmosClient, PartitionKey, exceptions
 from azure.identity import DefaultAzureCredential
 import os
 import uuid
 import json
 from datetime import datetime
 import time
-from typing import List, Dict, Any, Optional, Union
+from typing import List, Dict, Any, Optional
 from PIL import Image
-from PIL.Image import Image
 from io import BytesIO
 import requests  # For REST API to Vision
 from pdf2image import convert_from_bytes  # For PDF to image conversion
@@ -46,14 +45,14 @@ def analyze_pdf(form_recognizer_client: DocumentAnalysisClient, pdf_bytes: bytes
     logging.info(f"Document has {num_pages} page(s), {num_tables} table(s), and {num_styles} style(s).")
     return result
 
-def extract_layout_data(result: AnalyzeResult, visual_cues: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+def extract_layout_data(result: AnalyzeResult, visual_cues: Optional[List[Dict[str, Any]]] = None, source_file: str = "unknown") -> Dict[str, Any]:
     logging.info("Extracting layout data from analysis result.")
 
     layout_data = {
         "id": str(uuid.uuid4()),
         "metadata": {
             "processed_at": datetime.utcnow().isoformat(),
-            "source_file": myblob.name if hasattr(myblob, 'name') else "unknown",
+            "source_file": source_file,
             "pages_count": len(result.pages) if hasattr(result, "pages") else 0,
             "tables_count": len(result.tables) if hasattr(result, "tables") else 0,
             "visual_cues_count": len(visual_cues) if visual_cues else 0
@@ -63,9 +62,10 @@ def extract_layout_data(result: AnalyzeResult, visual_cues: Optional[List[Dict[s
     visual_cues = visual_cues or []  # List of dicts with visual cue info per cell
 
     # Log styles
-    for idx, style in enumerate(result.styles):
-        content_type = "handwritten" if style.is_handwritten else "no handwritten"
-        logging.info(f"Document contains {content_type} content")
+    if hasattr(result, "styles") and result.styles:
+        for idx, style in enumerate(result.styles):
+            content_type = "handwritten" if style.is_handwritten else "no handwritten"
+            logging.info(f"Document contains {content_type} content")
 
     # Process each page
     for page in result.pages:
@@ -77,7 +77,7 @@ def extract_layout_data(result: AnalyzeResult, visual_cues: Optional[List[Dict[s
             "selection_marks": [
                 {"state": mark.state, "confidence": mark.confidence}
                 for mark in page.selection_marks
-            ]
+            ] if hasattr(page, 'selection_marks') and page.selection_marks else []
         }
 
         # Log extracted lines
@@ -85,16 +85,17 @@ def extract_layout_data(result: AnalyzeResult, visual_cues: Optional[List[Dict[s
             logging.info(f"Line {line_idx}: '{line.content}'")
 
         # Log selection marks
-        for selection_mark in page.selection_marks:
-            logging.info(
-                f"Selection mark is '{selection_mark.state}' with confidence {selection_mark.confidence}"
-            )
+        if hasattr(page, 'selection_marks') and page.selection_marks:
+            for selection_mark in page.selection_marks:
+                logging.info(
+                    f"Selection mark is '{selection_mark.state}' with confidence {selection_mark.confidence}"
+                )
 
         # Extract tables
         page_tables = [
             table for table in result.tables
             if any(region.page_number == page.page_number for region in table.bounding_regions)
-        ]
+        ] if hasattr(result, 'tables') and result.tables else []
 
         for table_index, table in enumerate(page_tables):
             logging.info(f"Table {table_index}: {table.row_count} rows, {table.column_count} columns")
@@ -194,9 +195,9 @@ def call_vision_api(image_bytes: bytes, subscription_key: str, endpoint: str, ma
             response.raise_for_status()
             return response.json()
         except requests.exceptions.HTTPError as http_err:
-            if response.status_code == 429:  # Too Many Requests
+            if hasattr(http_err, 'response') and http_err.response.status_code == 429:  # Too Many Requests
                 if attempt < max_retries - 1:
-                    retry_after = int(response.headers.get('Retry-After', 1))
+                    retry_after = int(http_err.response.headers.get('Retry-After', 1))
                     logging.warning(f"Rate limit hit, waiting {retry_after} seconds...")
                     time.sleep(retry_after)
                     continue
@@ -337,6 +338,8 @@ def convert_pdf_to_images(pdf_bytes: bytes) -> List[Image.Image]:
     images = convert_from_bytes(pdf_bytes)
     return images
 
+@app.blob_trigger(arg_name="myblob", path="pdfinvoices/{name}",
+                  connection="invoicecontosostorage_STORAGE")
 def BlobTriggerContosoPDFLayoutsDocIntelligence(myblob: func.InputStream) -> None:
     logging.info(f"Python blob trigger function processed blob\n"
                  f"Name: {myblob.name}\n"
@@ -365,26 +368,26 @@ def BlobTriggerContosoPDFLayoutsDocIntelligence(myblob: func.InputStream) -> Non
         vision_endpoint = os.getenv("VISION_API_ENDPOINT")
         
         if not vision_key or not vision_endpoint:
-            raise ValueError("Vision API credentials not properly configured")
-            
-        images = convert_pdf_to_images(pdf_bytes)
-        if not images:
-            logging.warning("No images extracted from PDF")
-            return
-            
-        for page_num, image in enumerate(images, start=1):
-            img_bytes_io = BytesIO()
-            image.save(img_bytes_io, format='JPEG')
-            img_bytes = img_bytes_io.getvalue()
-            vision_result = call_vision_api(img_bytes, vision_key, vision_endpoint)
-            cues = extract_visual_cues_from_vision(vision_result, page_num)
-            visual_cues.extend(cues)
-        logging.info(f"Visual cues extracted: {visual_cues}")
+            logging.warning("Vision API credentials not configured - skipping visual cue detection")
+        else:
+            images = convert_pdf_to_images(pdf_bytes)
+            if not images:
+                logging.warning("No images extracted from PDF")
+            else:
+                for page_num, image in enumerate(images, start=1):
+                    img_bytes_io = BytesIO()
+                    image.save(img_bytes_io, format='JPEG')
+                    img_bytes = img_bytes_io.getvalue()
+                    vision_result = call_vision_api(img_bytes, vision_key, vision_endpoint)
+                    cues = extract_visual_cues_from_vision(vision_result, page_num)
+                    visual_cues.extend(cues)
+                logging.info(f"Visual cues extracted: {visual_cues}")
     except Exception as e:
         logging.error(f"Error processing visual cues with AI Vision: {e}")
+        # Continue processing without visual cues
 
     try:
-        layout_data = extract_layout_data(result, visual_cues)
+        layout_data = extract_layout_data(result, visual_cues, myblob.name)
         logging.info("Successfully extracted and merged layout data.")
     except Exception as e:
         logging.error(f"Error extracting layout data: {e}")
@@ -395,10 +398,3 @@ def BlobTriggerContosoPDFLayoutsDocIntelligence(myblob: func.InputStream) -> Non
         logging.info("Successfully saved layout data to Cosmos DB.")
     except Exception as e:
         logging.error(f"Error saving layout data to Cosmos DB: {e}")
-
-@app.blob_trigger(arg_name="myblob", path="pdfinvoices/{name}",
-                               connection="invoicecontosostorage_STORAGE") 
-def BlobTriggerContosoPDFInvoicesDocIntelligence(myblob: func.InputStream):
-    logging.info(f"Python blob trigger function processed blob"
-                f"Name: {myblob.name}"
-                f"Blob Size: {myblob.length} bytes")
