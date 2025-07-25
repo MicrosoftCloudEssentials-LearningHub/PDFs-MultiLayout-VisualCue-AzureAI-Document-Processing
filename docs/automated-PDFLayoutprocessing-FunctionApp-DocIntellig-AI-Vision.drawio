@@ -1,6 +1,6 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.4 Chrome/138.0.7204.97 Electron/37.2.1 Safari/537.36" version="28.0.4">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.0.6 Chrome/138.0.7204.100 Electron/37.2.3 Safari/537.36" version="28.0.6">
   <diagram name="Page-1" id="_ZzkEdzZPlF0T37kGrCl">
-    <mxGraphModel dx="732" dy="1532" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1601" dy="2045" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -27,10 +27,10 @@
         <mxCell id="SBEox3NDaokPfLYJbtWu-3" value="Employee" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="SBEox3NDaokPfLYJbtWu-10" vertex="1">
           <mxGeometry y="30" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="_wiV1sLz3M6k8l1JJ68s-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.126;entryY=0.408;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="SBEox3NDaokPfLYJbtWu-12" target="qB0o09IW0mbKmVrXtbLM-1" edge="1">
+        <mxCell id="_wiV1sLz3M6k8l1JJ68s-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.031;entryY=0.621;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="SBEox3NDaokPfLYJbtWu-12" target="MwsIeyTlQLMsmfNamO9Q-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="510" y="18" />
+              <mxPoint x="510" y="12" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -75,12 +75,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="_wiV1sLz3M6k8l1JJ68s-1" value="Document Intelligence" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/Form_Recognizers.svg;" parent="1" vertex="1">
-          <mxGeometry x="680" y="90" width="63.2" height="68" as="geometry" />
+          <mxGeometry x="760" y="58" width="63.2" height="68" as="geometry" />
         </mxCell>
         <mxCell id="_wiV1sLz3M6k8l1JJ68s-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.989;entryY=0.598;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="_wiV1sLz3M6k8l1JJ68s-1" target="SBEox3NDaokPfLYJbtWu-12" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="720" y="336" />
+              <mxPoint x="790" y="124" />
+              <mxPoint x="790" y="336" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -89,15 +90,22 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qB0o09IW0mbKmVrXtbLM-1" value="Azure &lt;br&gt;AI Vision&amp;nbsp;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/Computer_Vision.svg;" vertex="1" parent="1">
-          <mxGeometry x="550" y="-10" width="68" height="68" as="geometry" />
+        <mxCell id="qB0o09IW0mbKmVrXtbLM-1" value="Azure &lt;br&gt;AI Vision&amp;nbsp;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/Computer_Vision.svg;" parent="1" vertex="1">
+          <mxGeometry x="670" y="-19" width="68" height="68" as="geometry" />
         </mxCell>
-        <mxCell id="qB0o09IW0mbKmVrXtbLM-3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.609;entryDx=0;entryDy=0;entryPerimeter=0;edgeStyle=orthogonalEdgeStyle;elbow=vertical;shape=link;" edge="1" parent="1" source="_wiV1sLz3M6k8l1JJ68s-1" target="qB0o09IW0mbKmVrXtbLM-1">
+        <mxCell id="qB0o09IW0mbKmVrXtbLM-3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.609;entryDx=0;entryDy=0;entryPerimeter=0;edgeStyle=orthogonalEdgeStyle;elbow=vertical;shape=link;" parent="1" source="_wiV1sLz3M6k8l1JJ68s-1" target="qB0o09IW0mbKmVrXtbLM-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="710" y="31" />
+              <mxPoint x="790" y="20" />
+              <mxPoint x="738" y="20" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="MwsIeyTlQLMsmfNamO9Q-2" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shape=link;" edge="1" parent="1" source="MwsIeyTlQLMsmfNamO9Q-1" target="qB0o09IW0mbKmVrXtbLM-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MwsIeyTlQLMsmfNamO9Q-1" value="AI Foundry&amp;nbsp;&lt;br&gt;LLMs" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/AI_Studio.svg;" vertex="1" parent="1">
+          <mxGeometry x="550" y="-30" width="64" height="68" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

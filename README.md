@@ -8,7 +8,7 @@ Costa Rica
 [![GitHub](https://img.shields.io/badge/--181717?logo=github&logoColor=ffffff)](https://github.com/)
 [brown9804](https://github.com/brown9804)
 
-Last updated: 2025-07-16
+Last updated: 2025-07-25
 
 -----------------------------
 
@@ -79,7 +79,7 @@ Last updated: 2025-07-16
 > - Automates the extraction and transformation of layout data into usable formats like JSON or CSV.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/87feac68-98ec-42fb-86ee-fe0612e59c3b" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
+  <img src="https://github.com/user-attachments/assets/322c8d9b-5ca3-4ba4-b0cd-ac14f198229e" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
 </div>
 
 > [!NOTE]
@@ -95,7 +95,7 @@ Last updated: 2025-07-16
 > - When a blob is uploaded, Event Grid routes the event to your Azure Function.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/4371c3f7-9a77-4e41-8f80-714333c1a1c3" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
+  <img src="https://github.com/user-attachments/assets/298ce8db-af28-487c-8126-9ba74986e8a5" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
 </div>
 
 ## Important Considerations for Production Environment
@@ -447,7 +447,7 @@ Last updated: 2025-07-16
 
 <!-- START BADGE -->
 <div align="center">
-  <img src="https://img.shields.io/badge/Total%20views-1423-limegreen" alt="Total views">
+  <img src="https://img.shields.io/badge/Total%20views-1447-limegreen" alt="Total views">
   <p>Refresh Date: 2025-07-25</p>
 </div>
 <!-- END BADGE -->

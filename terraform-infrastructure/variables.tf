@@ -63,7 +63,7 @@ variable "ai_vision_sku" {
 variable "ai_vision_tags" {
   description = "Tags to be applied to the AI Vision resource"
   type        = map(string)
-  default     = {
+  default = {
     Environment = "Development"
     Service     = "AI Vision"
   }
@@ -91,4 +91,53 @@ variable "sql_container_name" {
 variable "throughput" {
   description = "The throughput (RU/s) to be allocated to the Cosmos DB SQL database or container."
   default     = 400
+}
+
+# These variables configure the AI Studio Hub, Project, and OpenAI services
+# for LLM-powered PDF extraction and analysis capabilities
+
+variable "environment" {
+  description = "Environment tag for resources (dev, staging, prod). Used for resource tagging and naming conventions."
+  type        = string
+  default     = "dev"
+
+  validation {
+    condition     = contains(["dev", "staging", "prod"], var.environment)
+    error_message = "Environment must be one of: dev, staging, prod."
+  }
+}
+
+# Azure OpenAI Service Configuration
+variable "openai_account_name" {
+  description = "The name of the Azure OpenAI account. Must be globally unique and support GPT-4 models for PDF analysis."
+  type        = string
+}
+
+variable "openai_location" {
+  description = "The Azure region for OpenAI resources. Must be a region that supports Azure OpenAI service (eastus, westeurope, etc.)"
+  type        = string
+  default     = "eastus" # Default to East US which supports OpenAI
+
+  validation {
+    condition     = contains(["eastus", "westeurope", "southcentralus", "westus"], var.openai_location)
+    error_message = "OpenAI location must be in a region that supports Azure OpenAI service."
+  }
+}
+
+# AI Studio Hub Configuration
+variable "ai_hub_name" {
+  description = "The name of the AI Studio Hub. Central resource for managing AI projects and shared resources."
+  type        = string
+}
+
+# AI Project Configuration  
+variable "ai_project_name" {
+  description = "The name of the AI Studio Project. Specific workspace for PDF extraction and skills analysis workflows."
+  type        = string
+}
+
+# AI Storage Configuration
+variable "ai_storage_account_name" {
+  description = "The name of the storage account for AI Hub and Project. Stores model artifacts, experiments, and training data."
+  type        = string
 }
