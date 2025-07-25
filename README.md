@@ -95,7 +95,7 @@ Last updated: 2025-07-16
 > - When a blob is uploaded, Event Grid routes the event to your Azure Function.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/4371c3f7-9a77-4e41-8f80-714333c1a1c3" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
+  <img src="https://github.com/user-attachments/assets/298ce8db-af28-487c-8126-9ba74986e8a5" alt="Centered Image" style="border: 2px solid #4CAF50; border-radius: 5px; padding: 5px;"/>
 </div>
 
 ## Important Considerations for Production Environment
