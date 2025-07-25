@@ -1,6 +1,6 @@
 # Local .terraform directories
 .terraform/
-
+**__pycache__
 # .tfstate files
 *.tfstate
 *.tfstate.*
@@ -37,3 +37,101 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Azure Functions
+.azure/
+.vscode/
+local.settings.json
+.azurefunctions/
+
+# Testing artifacts
+testing/results/
+testing/sample_pdfs/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Log files
+*.log
+logs/
+
+# Cache files
+.cache/
+*.cache
+
+# Generated samples and cleanup scripts
+remove_emojis.py
+clean_makefile.py
+
+# Alternative/duplicate test files
+extract_content_test.py
+test_pdf_analysis.py
+simple_pdf_analysis.py
+
+# Generated metrics and documentation
+metrics.json
+README-SETUP.md
+
+# Performance test results
+*.perf
+profile_output/
+
+# Package files
+*.tar.gz
+*.zip
+*.rar
+
+# VS Code specific files
+.vscode/
+*.code-workspace
