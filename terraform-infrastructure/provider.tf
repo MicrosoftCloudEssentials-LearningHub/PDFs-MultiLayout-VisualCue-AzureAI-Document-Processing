@@ -7,19 +7,19 @@ terraform {
   # Specify the required provider and its version
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"  # Source of the AzureRM provider
-      version = "~> 4.16.0"          # Version of the AzureRM provider
+      source  = "hashicorp/azurerm" # Source of the AzureRM provider
+      version = "~> 4.16.0"         # Version of the AzureRM provider
     }
   }
 }
 
 provider "azurerm" {
-    features {  # Enable features for the AzureRM provider
-        key_vault {
-        recover_soft_deleted_key_vaults = false
-        purge_soft_delete_on_destroy    = true
-        }
+  features { # Enable features for the AzureRM provider
+    key_vault {
+      recover_soft_deleted_key_vaults = false
+      purge_soft_delete_on_destroy    = true
+    }
   }
-                      
-  subscription_id = var.subscription_id  # Use the subscription ID variable
+
+  subscription_id = var.subscription_id # Use the subscription ID variable
 }
