@@ -334,7 +334,7 @@ Last updated: 2025-07-25
 
    <img width="550" alt="image" src="https://github.com/user-attachments/assets/0a4ed541-a693-485c-b6ca-7d5fb55a61d2">
 
-- Provide a function name, like `BlobTriggerContosoPDFInvoicesDocIntelligence`:
+- Provide a function name, like `BlobTriggerPDFMultiLayoutsDocIntelligence`:
 
    <img width="550" alt="image" src="https://github.com/user-attachments/assets/263cef5c-4460-46cb-8899-fb609b191d81">
 
