@@ -36,6 +36,7 @@ environment = "dev"
 # Azure OpenAI Service
 openai_account_name = "openai-pdf-brownix11" # "your-openai-account-name"
 openai_location     = "eastus"              # Must be a region that supports OpenAI
+# Options e.g: eastus, westus, southcentralus, westeurope, northeurope
 
 # AI Studio Hub and Project
 ai_hub_name     = "ai-hub-pdf-brownix11"        # "your-ai-hub-name"
