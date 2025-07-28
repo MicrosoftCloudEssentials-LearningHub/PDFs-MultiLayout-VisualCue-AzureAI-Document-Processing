@@ -397,6 +397,7 @@ resource "azurerm_linux_function_app" "function_app" {
     # Azure AI Vision for visual cue detection and image analysis
     "VISION_API_ENDPOINT" = azurerm_cognitive_account.ai_vision.endpoint
     "VISION_API_KEY"      = azurerm_cognitive_account.ai_vision.primary_access_key
+    "VISION_API_VERSION"  = "2023-10-01"  # Latest stable API version
 
     # === Azure OpenAI Configuration for LLM-Powered PDF Analysis ===
     # Main OpenAI service endpoint and authentication
