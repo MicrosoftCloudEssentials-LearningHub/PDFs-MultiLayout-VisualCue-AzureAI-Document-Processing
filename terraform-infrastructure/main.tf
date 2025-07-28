@@ -532,18 +532,31 @@ resource "azurerm_cognitive_deployment" "gpt4o" {
 
 # Text Embedding Model for Semantic Search and Document Analysis
 resource "azurerm_cognitive_deployment" "text_embedding" {
-  name                 = "text-embedding-ada-002"
+  name                 = "text-embedding-ada-3-large"
   cognitive_account_id = azurerm_cognitive_account.openai.id
 
   model {
     format  = "OpenAI"
-    name    = "text-embedding-ada-002"
-    version = "2"
+    # Example: Use "text-embedding-3-large" as an embedding model
+    # You can use one of the following models for text embedding:
+    # - "text-embedding-3-small" (recommended for most use cases)
+    # - "text-embedding-3-large" (higher accuracy, higher cost)
+    # - "text-search-ada-doc-001" (legacy, for backward compatibility)
+    # - "text-embedding-ada-002" (legacy, for backward compatibility)
+    # - "text-search-babbage-doc-001" (legacy, for backward compatibility)
+    # - "text-search-curie-doc-001" (legacy, for backward compatibility)
+    # - "text-search-davinci-doc-001" (legacy, for backward compatibility)
+    name    = "text-embedding-3-large"
+    version = "1" # This depends on the model
   }
 
   sku {
     name     = "Standard"
-    capacity = 120 # High capacity for batch document processing
+    # Capacity is the number of 1,000 tokens per minute (TPM) units.
+    # Allowed values depend on your Azure OpenAI quota and region.
+    # Common values: 1, 2, 5, 10, 20, 40, 80, 160, etc.
+    # You can only set up to your available quota for this model.
+    capacity = 1 # Example: set to 1 to fit within available quota
   }
 
   depends_on = [azurerm_cognitive_account.openai]
