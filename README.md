@@ -69,7 +69,7 @@ Last updated: 2025-07-25
 
 > `How can you extract layout, text, visual, and other elements` from `PDFs` stored in an Azure Storage Account, process them using Azure AI services, and `store the results` in Cosmos DB for `further analysis?` This solution is `designed to accelerate the process` of building your own implementation. Please `feel free to use any of the provided reference.` I'm happy to contribute. Once this solution is deployed:
 >
-> 1. Upload your documents: Just `drop your PDFs or images into an Azure Storage container `and the system takes over from there. 
+> 1. Upload your documents: Just `drop your PDFs or images into an Azure Storage container`and the system takes over from there. 
 > 2. Automated intelligent processing: Behind the scenes, `Azure Functions orchestrates a powerful AI workflow`: 
 >     - Document Intelligence pulls out tables, text, and form data
 >     - AI Vision spots visual cues like checkmarks and highlights
