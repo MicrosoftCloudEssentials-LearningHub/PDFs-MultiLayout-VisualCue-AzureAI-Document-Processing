@@ -8,7 +8,7 @@ Costa Rica
 [![GitHub](https://img.shields.io/badge/--181717?logo=github&logoColor=ffffff)](https://github.com/)
 [brown9804](https://github.com/brown9804)
 
-Last updated: 2025-07-25
+Last updated: 2025-07-29
 
 -----------------------------
 
@@ -17,6 +17,8 @@ Last updated: 2025-07-25
 - Table structure and text are extracted using Azure Document Intelligence (Layout model).
 - Visual selection cues are detected using Azure AI Vision or image preprocessing.
 - Visual indicators are mapped to structured data, returning only the selected values in a clean JSON format.
+- Advanced semantic understanding is provided by Azure OpenAI to analyze document content and context.
+- Multiple file formats are supported, including PDFs and various image formats.
 - The logic is abstracted to support multiple layout variations, so the system adapts easily to new document formats and selection styles.
 
 > [!IMPORTANT]
@@ -65,11 +67,14 @@ Last updated: 2025-07-25
 
 </details>
 
-> How to extract layout elements from PDFs stored in an Azure Storage Account, process them using Azure Document Intelligence, and store the results in Cosmos DB for further analysis.
+> `How can you extract layout, text, visual, and other elements` from `PDFs` stored in an Azure Storage Account, process them using Azure AI services, and `store the results` in Cosmos DB for `further analysis?` This solution is `designed to accelerate the process` of building your own implementation. Please `feel free to use any of the provided reference.` I'm happy to contribute. Once this solution is deployed:
 >
-> 1. Upload your PDFs to an Azure Blob Storage container. <br/>
-> 2. An Azure Function is triggered by the upload, which calls the Azure Document Intelligence Layout API to analyze the document structure.  <br/>
-> 3. The extracted layout data (such as tables, checkboxes, and text) is parsed and subsequently stored in a Cosmos DB database, ensuring a seamless and automated workflow from document upload to data storage.
+> 1. Upload your documents: Just `drop your PDFs or images into an Azure Storage container`and the system takes over from there. 
+> 2. Automated intelligent processing: Behind the scenes, `Azure Functions orchestrates a powerful AI workflow`: 
+>     - Document Intelligence pulls out tables, text, and form data
+>     - AI Vision spots visual cues like checkmarks and highlights
+>     - Azure OpenAI understands what the document actually means 
+> 3. Centralized information management: `All extracted data is stored in Cosmos DB`, organized and accessible. The system `adapts to differents document layouts without requiring custom code for each format.`
 
 > [!NOTE]
 > Advantages of Document Intelligence for organizations handling with large volumes of documents: <br/>
@@ -447,7 +452,7 @@ Last updated: 2025-07-25
 
 <!-- START BADGE -->
 <div align="center">
-  <img src="https://img.shields.io/badge/Total%20views-1447-limegreen" alt="Total views">
-  <p>Refresh Date: 2025-07-25</p>
+  <img src="https://img.shields.io/badge/Total%20views-1616-limegreen" alt="Total views">
+  <p>Refresh Date: 2025-07-29</p>
 </div>
 <!-- END BADGE -->
