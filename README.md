@@ -1,6 +1,6 @@
 # Demo: Azure Implementation <br/> PDF Layout Extraction with Azure AI Document Intelligence Supporting Multiple Document Versions with Visual Selection Cues (full-code approach)
 
-`Azure Storage + Document Intelligence + Function App +  Cosmos DB`
+`Azure Storage + Document Intelligence + AI Vision + Azure Open AI (LLMs) + Function App +  Cosmos DB`
 
 Costa Rica
 
