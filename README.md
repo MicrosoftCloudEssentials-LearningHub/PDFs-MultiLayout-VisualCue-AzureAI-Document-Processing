@@ -8,7 +8,7 @@ Costa Rica
 [![GitHub](https://img.shields.io/badge/--181717?logo=github&logoColor=ffffff)](https://github.com/)
 [brown9804](https://github.com/brown9804)
 
-Last updated: 2025-07-29
+Last updated: 2025-07-30
 
 -----------------------------
 
@@ -274,34 +274,68 @@ Last updated: 2025-07-29
 
 ## Function App: Configure/Validate the Environment variables
 
+> [!IMPORTANT]
+> `All environment variable names must exactly match between` your `Terraform deployment configuration` (in `main.tf`) and your `Function App environment settings`. Any mismatch will cause runtime failures when the application tries to access Azure resources.
+
 > [!NOTE]
 > This example is using system-assigned managed identity to assign RBACs (Role-based Access Control).
 
-- Under `Settings`, go to `Environment variables`. And `+ Add` the following variables:
+- Under `Settings`, go to `Environment variables`. And `+ Add` the following variables. For example:
 
-  - `COSMOS_DB_ENDPOINT`: Your Cosmos DB account endpoint 🡢 `Review the existence of this, if not create it`
-  - `COSMOS_DB_KEY`: Your Cosmos DB account key 🡢 `Review the existence of this, if not create it`
-  - `COSMOS_DB_CONNECTION_STRING`: Your Cosmos DB connection string 🡢 `Review the existence of this, if not create it`
-  - `invoicecontosostorage_STORAGE`: Your Storage Account connection string 🡢 `Review the existence of this, if not create it`
-  - `FORM_RECOGNIZER_ENDPOINT`: For example: `https://<your-form-recognizer-endpoint>.cognitiveservices.azure.com/` 🡢 `Review the existence of this, if not create it`
-  - `FORM_RECOGNIZER_KEY`: Your Documment Intelligence Key (Form Recognizer). 🡢
-  - `FUNCTIONS_EXTENSION_VERSION`: `~4` 🡢 `Review the existence of this, if not create it`
-  - `WEBSITE_RUN_FROM_PACKAGE`: `1` 🡢 `Review the existence of this, if not create it`
-  - `FUNCTIONS_WORKER_RUNTIME`: `python` 🡢 `Review the existence of this, if not create it`
-  - `FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR`: `true` (This setting ensures that all entry point errors are visible in your application insights logs). 🡢 `Review the existence of this, if not create it`
+  <img width="550" alt="image" src="https://github.com/user-attachments/assets/ec5d60f3-5136-489d-8796-474b7250865d">
 
-      <img width="550" alt="image" src="https://github.com/user-attachments/assets/31d813e7-38ba-46ff-9e4b-d091ae02706a">
+- Click on `Apply` to save your configuration.
+  
+    <img width="550" alt="image" src="https://github.com/user-attachments/assets/437b44bb-7735-4d17-ae49-e211eca64887">
 
-      <img width="550" alt="image" src="https://github.com/user-attachments/assets/45313857-b337-4231-9184-d2bb46e19267">
+- Here are a few examples of how to get those values. `If a Terraform deployment template was used, these are linked automatically`, so please remember to review them.
 
-      <img width="550" alt="image" src="https://github.com/user-attachments/assets/074d2fa5-c64d-43bd-8ed7-af6da46d86a2">
+  <img width="550" alt="image" src="https://github.com/user-attachments/assets/31d813e7-38ba-46ff-9e4b-d091ae02706a">
+  
+  <img width="550" alt="image" src="https://github.com/user-attachments/assets/45313857-b337-4231-9184-d2bb46e19267">
+  
+  <img width="550" alt="image" src="https://github.com/user-attachments/assets/074d2fa5-c64d-43bd-8ed7-af6da46d86a2">
+  
+> `These values depend on the specific you choose and deploy, like the AI models`, you can also adjust `LLM_MAX_TOKENS` based on your model's capabilities and `LLM_TEMPERATURE` based on your use case requirements.
 
-      <img width="550" alt="image" src="https://github.com/user-attachments/assets/ec5d60f3-5136-489d-8796-474b7250865d">
-
-  - Click on `Apply` to save your configuration.
+- `FUNCTIONS_EXTENSION_VERSION`: `~4` 🡢 `Review the existence of this, if not create it`
+- `WEBSITE_RUN_FROM_PACKAGE`: `1` 🡢 `Review the existence of this, if not create it`
+- `FUNCTIONS_WORKER_RUNTIME`: `python` 🡢 `Review the existence of this, if not create it`
+- `FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR`: `true` (This setting ensures that all entry point errors are visible in your application insights logs) 🡢 `Review the existence of this, if not create it`
+- `COSMOS_DB_ENDPOINT`: Your Cosmos DB account endpoint 🡢 `Review the existence of this, if not create it`
     
-      <img width="550" alt="image" src="https://github.com/user-attachments/assets/437b44bb-7735-4d17-ae49-e211eca64887">
+<details>
+<summary><b> </b> Click to see more</summary>
 
+- `COSMOS_DB_KEY`: Your Cosmos DB account key 🡢 `Review the existence of this, if not create it`
+- `COSMOS_DB_CONNECTION_STRING`: Your Cosmos DB connection string 🡢 `Review the existence of this, if not create it`
+- `invoicecontosostorage_STORAGE`: Your Storage Account connection string 🡢 `Review the existence of this, if not create it`
+- `FORM_RECOGNIZER_ENDPOINT`: For example: `https://<your-form-recognizer-endpoint>.cognitiveservices.azure.com/` 🡢 `Review the existence of this, if not create it`
+- `FORM_RECOGNIZER_KEY`: Your Document Intelligence Key (Form Recognizer) 🡢 `Review the existence of this, if not create it`
+- `APPINSIGHTS_INSTRUMENTATIONKEY`: Your Application Insights instrumentation key 🡢 `Review the existence of this, if not create it`
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Your Application Insights connection string 🡢 `Review the existence of this, if not create it`
+- `VISION_API_ENDPOINT`: Your Azure AI Vision endpoint for visual cue detection 🡢 `Review the existence of this, if not create it`
+- `VISION_API_KEY`: Your Azure AI Vision API key 🡢 `Review the existence of this, if not create it`
+- `VISION_API_VERSION`: `2024-02-01` (Latest stable API version) 🡢 `Review the existence of this, if not create it`.  These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI service endpoint 🡢 `Review the existence of this, if not create it`
+- `AZURE_OPENAI_KEY`: Your Azure OpenAI API key 🡢 `Review the existence of this, if not create it`
+- `AZURE_OPENAI_API_VERSION`: e.g `2025-04-14`  🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_GPT4_DEPLOYMENT`: Your e.g GPT-4 deployment name for complex reasoning and analysis 🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_GPT4O_DEPLOYMENT`: Your e.g GPT-4o deployment name for advanced multimodal processing 🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_EMBEDDING_DEPLOYMENT`: Your text embedding deployment name for semantic search 🡢 `Review the existence of this, if not create it`
+- `AI_HUB_NAME`: Your AI Studio Hub name for model management 🡢 `Review the existence of this, if not create it`
+- `AI_PROJECT_NAME`: Your AI Studio Project name 🡢 `Review the existence of this, if not create it`
+- `AI_HUB_WORKSPACE_URL`: Your AI Hub workspace URL 🡢 `Review the existence of this, if not create it`
+- `AI_PROJECT_WORKSPACE_URL`: Your AI Project workspace URL 🡢 `Review the existence of this, if not create it`
+- `AI_STORAGE_ACCOUNT_NAME`: Your AI storage account name for model artifacts 🡢 `Review the existence of this, if not create it`
+- `AI_STORAGE_CONNECTION`: Your AI storage connection string 🡢 `Review the existence of this, if not create it`
+- `ENABLE_LLM_PROCESSING`: `true` (Enable LLM-powered PDF processing features) 🡢 `Review the existence of this, if not create it`
+- `LLM_MAX_TOKENS`: `4000` (Maximum tokens per request - adjust based on your model choice) 🡢 `Review the existence of this, if not create it`
+- `LLM_TEMPERATURE`: `0.1` (Low temperature for consistent extraction - adjust based on use case) 🡢 `Review the existence of this, if not create it`
+- `LLM_TIMEOUT_SECONDS`: `120` (Timeout for LLM requests - may need adjustment depending on model response time) 🡢 `Review the existence of this, if not create it`
+
+</details>
+  
 ## Function App: Develop the logic
 
 - You need to install [VSCode](https://code.visualstudio.com/download)
@@ -339,7 +373,7 @@ Last updated: 2025-07-29
 
    <img width="550" alt="image" src="https://github.com/user-attachments/assets/0a4ed541-a693-485c-b6ca-7d5fb55a61d2">
 
-- Provide a function name, like `BlobTriggerPDFMultiLayoutsDocIntelligence`:
+- Provide a function name, like `BlobTriggerPDFsMultiLayoutsDocIntelligence`:
 
    <img width="550" alt="image" src="https://github.com/user-attachments/assets/263cef5c-4460-46cb-8899-fb609b191d81">
 
@@ -361,22 +395,35 @@ Last updated: 2025-07-29
 
 - Now we need to update the function code to extract data from PDFs and store it in Cosmos DB, use this an example:
 
-    > 1. **PDF Upload**: A PDF file is uploaded to the Azure Blob Storage container (`pdfinvoices`).
-    > 2. **Trigger Azure Function**: The upload triggers the Azure Function `BlobTriggerContosoPDFLayoutsDocIntelligence`.
-    > 3. **Initialize Clients**: Sets up connections to Azure Document Intelligence and Cosmos DB.  
-    >    - Initializes the `DocumentAnalysisClient` using the `FORM_RECOGNIZER_ENDPOINT` and `FORM_RECOGNIZER_KEY` environment variables.  
-    >    - Initializes the `CosmosClient` using Azure Active Directory (AAD) via `DefaultAzureCredential`.
-    > 4. **Read PDF from Blob Storage**: Reads the PDF content from the blob into a byte stream.
-    > 5. **Analyze PDF**: Uses Azure Document Intelligence to analyze the layout of the PDF.  
-    >    - Calls `begin_analyze_document` with the `prebuilt-layout` model.  
-    >    - Waits for the analysis to complete and retrieves the layout result.
-    > 6. **Extract Layout Data**: Parses and structures the layout data from the analysis result.  
-    >    - Extracts lines, tables, and selection marks from each page.  
-    >    - Logs styles (e.g., handwritten content) and organizes data into a structured dictionary.
-    > 7. **Save Data to Cosmos DB**: Saves the structured layout data to Cosmos DB.  
-    >    - Ensures the database (`ContosoDBDocIntellig`) and container (`Layouts`) exist or creates them.  
-    >    - Inserts or updates the layout data using `upsert_item`.
-    > 8. **Logging (Process and Errors)**: Logs each step of the process, including success messages and detailed error handling for debugging and monitoring.
+  > 1. **PDF Upload**: A PDF file is uploaded to the Azure Blob Storage container (`pdfinvoices`).
+  > 2. **Trigger Azure Function**: The upload triggers the Azure Function `BlobTriggerPDFsMultiLayoutsAIDocIntelligence`.
+  > 3. **Initialize Clients**: Sets up connections to Azure Document Intelligence, AI Vision, OpenAI, and Cosmos DB.  
+  >    - Initializes the `DocumentAnalysisClient` using the `FORM_RECOGNIZER_ENDPOINT` and `FORM_RECOGNIZER_KEY` environment variables.  
+  >    - Initializes the `AzureOpenAI` client for LLM analysis using OpenAI deployment details.
+  >    - Configures the Vision API for visual cue detection.
+  >    - Sets up the `CosmosClient` for data storage.
+  > 4. **Read PDF from Blob Storage**: Reads the PDF content from the blob into a byte stream.
+  > 5. **Analyze PDF**: Uses Azure Document Intelligence to analyze the layout of the PDF.  
+  >    - Calls `begin_analyze_document` with the `prebuilt-layout` model.  
+  >    - Waits for the analysis to complete and retrieves the layout result.
+  > 6. **Extract Layout Data**: Parses and structures the layout data from the analysis result.  
+  >    - Extracts lines, tables, and selection marks from each page.  
+  >    - Identifies visual selection cues using AI Vision for enhanced form recognition.
+  >    - Logs styles (e.g., handwritten content) and organizes data into a structured dictionary.
+  > 7. **Enhance with AI Vision**: Analyzes visual elements for additional insights.
+  >    - Detects and processes visual selection cues that Document Intelligence might miss.
+  >    - Combines visual analysis with document structure understanding.
+  > 8. **Apply LLM Analysis**: Uses Azure OpenAI for semantic understanding of document content.
+  >    - Prepares structured content for the LLM with meaningful context.
+  >    - Analyzes content relationships and extracts high-level insights.
+  > 9. **Save Data to Cosmos DB**: Saves the structured layout data to Cosmos DB.  
+  >    - Ensures the database (`DocumentAnalysisDB`) and container (`ProcessedDocuments`) exist or creates them.  
+  >    - Prepares document for storage with metadata and timestamps.
+  >    - Inserts or updates the layout data using `upsert_item`.
+  > 10. **Logging (Process and Errors)**: Logs each step of the process, including success messages and detailed error handling for debugging and monitoring.
+  >     - Uses structured logging for better traceability.
+  >     - Includes processing time metrics for performance analysis.
+  >     - Provides comprehensive error handling with meaningful diagnostics.
 
   - Update the function_app.py, for example [see the code used in this demo](./src/function_app.py):
 
@@ -444,7 +491,7 @@ Last updated: 2025-07-29
 
 - Check all the logs, and traces generated. Also review the information parsed:
 
-   <img width="550" alt="image" src="https://github.com/user-attachments/assets/8f4631cc-162e-4c3b-913d-d146ea4e36b3">
+  <img width="550" alt="image" src="https://github.com/user-attachments/assets/2f28cc69-d389-4ef6-9209-57f76c9a09aa" />
 
 - Validate that the information was uploaded to the Cosmos DB. Under `Data Explorer`, check your `Database`.
 
@@ -452,7 +499,7 @@ Last updated: 2025-07-29
 
 <!-- START BADGE -->
 <div align="center">
-  <img src="https://img.shields.io/badge/Total%20views-1616-limegreen" alt="Total views">
-  <p>Refresh Date: 2025-07-29</p>
+  <img src="https://img.shields.io/badge/Total%20views-1710-limegreen" alt="Total views">
+  <p>Refresh Date: 2025-07-30</p>
 </div>
 <!-- END BADGE -->
