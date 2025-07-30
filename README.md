@@ -275,7 +275,7 @@ Last updated: 2025-07-29
 ## Function App: Configure/Validate the Environment variables
 
 > [!IMPORTANT]
->  `All environment variable names must exactly match between` your `Terraform deployment configuration` (in `main.tf`) and your `Function App environment settings`. Any mismatch will cause runtime failures when the application tries to access Azure resources.
+> `All environment variable names must exactly match between` your `Terraform deployment configuration` (in `main.tf`) and your `Function App environment settings`. Any mismatch will cause runtime failures when the application tries to access Azure resources.
 
 > [!NOTE]
 > This example is using system-assigned managed identity to assign RBACs (Role-based Access Control).
@@ -298,41 +298,41 @@ Last updated: 2025-07-29
   
 > `These values depend on the specific you choose and deploy, like the AI models`, you can also adjust `LLM_MAX_TOKENS` based on your model's capabilities and `LLM_TEMPERATURE` based on your use case requirements.
 
-  - `FUNCTIONS_EXTENSION_VERSION`: `~4` 🡢 `Review the existence of this, if not create it`
-  - `WEBSITE_RUN_FROM_PACKAGE`: `1` 🡢 `Review the existence of this, if not create it`
-  - `FUNCTIONS_WORKER_RUNTIME`: `python` 🡢 `Review the existence of this, if not create it`
-  - `FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR`: `true` (This setting ensures that all entry point errors are visible in your application insights logs) 🡢 `Review the existence of this, if not create it`
-  - `COSMOS_DB_ENDPOINT`: Your Cosmos DB account endpoint 🡢 `Review the existence of this, if not create it`
+- `FUNCTIONS_EXTENSION_VERSION`: `~4` 🡢 `Review the existence of this, if not create it`
+- `WEBSITE_RUN_FROM_PACKAGE`: `1` 🡢 `Review the existence of this, if not create it`
+- `FUNCTIONS_WORKER_RUNTIME`: `python` 🡢 `Review the existence of this, if not create it`
+- `FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR`: `true` (This setting ensures that all entry point errors are visible in your application insights logs) 🡢 `Review the existence of this, if not create it`
+- `COSMOS_DB_ENDPOINT`: Your Cosmos DB account endpoint 🡢 `Review the existence of this, if not create it`
     
 <details>
 <summary><b> </b> Click to see more</summary>
 
-  - `COSMOS_DB_KEY`: Your Cosmos DB account key 🡢 `Review the existence of this, if not create it`
-  - `COSMOS_DB_CONNECTION_STRING`: Your Cosmos DB connection string 🡢 `Review the existence of this, if not create it`
-  - `invoicecontosostorage_STORAGE`: Your Storage Account connection string 🡢 `Review the existence of this, if not create it`
-  - `FORM_RECOGNIZER_ENDPOINT`: For example: `https://<your-form-recognizer-endpoint>.cognitiveservices.azure.com/` 🡢 `Review the existence of this, if not create it`
-  - `FORM_RECOGNIZER_KEY`: Your Document Intelligence Key (Form Recognizer) 🡢 `Review the existence of this, if not create it`
-  - `APPINSIGHTS_INSTRUMENTATIONKEY`: Your Application Insights instrumentation key 🡢 `Review the existence of this, if not create it`
-  - `APPLICATIONINSIGHTS_CONNECTION_STRING`: Your Application Insights connection string 🡢 `Review the existence of this, if not create it`
-  - `VISION_API_ENDPOINT`: Your Azure AI Vision endpoint for visual cue detection 🡢 `Review the existence of this, if not create it`
-  - `VISION_API_KEY`: Your Azure AI Vision API key 🡢 `Review the existence of this, if not create it`
-  - `VISION_API_VERSION`: `2024-02-01` (Latest stable API version) 🡢 `Review the existence of this, if not create it`.  These values depend on the specific you choose and deploy
-  - `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI service endpoint 🡢 `Review the existence of this, if not create it`
-  - `AZURE_OPENAI_KEY`: Your Azure OpenAI API key 🡢 `Review the existence of this, if not create it`
-  - `AZURE_OPENAI_API_VERSION`: e.g `2025-04-14`  🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
-  - `AZURE_OPENAI_GPT4_DEPLOYMENT`: Your e.g GPT-4 deployment name for complex reasoning and analysis 🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
-  - `AZURE_OPENAI_GPT4O_DEPLOYMENT`: Your e.g GPT-4o deployment name for advanced multimodal processing 🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
-  - `AZURE_OPENAI_EMBEDDING_DEPLOYMENT`: Your text embedding deployment name for semantic search 🡢 `Review the existence of this, if not create it`
-  - `AI_HUB_NAME`: Your AI Studio Hub name for model management 🡢 `Review the existence of this, if not create it`
-  - `AI_PROJECT_NAME`: Your AI Studio Project name 🡢 `Review the existence of this, if not create it`
-  - `AI_HUB_WORKSPACE_URL`: Your AI Hub workspace URL 🡢 `Review the existence of this, if not create it`
-  - `AI_PROJECT_WORKSPACE_URL`: Your AI Project workspace URL 🡢 `Review the existence of this, if not create it`
-  - `AI_STORAGE_ACCOUNT_NAME`: Your AI storage account name for model artifacts 🡢 `Review the existence of this, if not create it`
-  - `AI_STORAGE_CONNECTION`: Your AI storage connection string 🡢 `Review the existence of this, if not create it`
-  - `ENABLE_LLM_PROCESSING`: `true` (Enable LLM-powered PDF processing features) 🡢 `Review the existence of this, if not create it`
-  - `LLM_MAX_TOKENS`: `4000` (Maximum tokens per request - adjust based on your model choice) 🡢 `Review the existence of this, if not create it`
-  - `LLM_TEMPERATURE`: `0.1` (Low temperature for consistent extraction - adjust based on use case) 🡢 `Review the existence of this, if not create it`
-  - `LLM_TIMEOUT_SECONDS`: `120` (Timeout for LLM requests - may need adjustment depending on model response time) 🡢 `Review the existence of this, if not create it`
+- `COSMOS_DB_KEY`: Your Cosmos DB account key 🡢 `Review the existence of this, if not create it`
+- `COSMOS_DB_CONNECTION_STRING`: Your Cosmos DB connection string 🡢 `Review the existence of this, if not create it`
+- `invoicecontosostorage_STORAGE`: Your Storage Account connection string 🡢 `Review the existence of this, if not create it`
+- `FORM_RECOGNIZER_ENDPOINT`: For example: `https://<your-form-recognizer-endpoint>.cognitiveservices.azure.com/` 🡢 `Review the existence of this, if not create it`
+- `FORM_RECOGNIZER_KEY`: Your Document Intelligence Key (Form Recognizer) 🡢 `Review the existence of this, if not create it`
+- `APPINSIGHTS_INSTRUMENTATIONKEY`: Your Application Insights instrumentation key 🡢 `Review the existence of this, if not create it`
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Your Application Insights connection string 🡢 `Review the existence of this, if not create it`
+- `VISION_API_ENDPOINT`: Your Azure AI Vision endpoint for visual cue detection 🡢 `Review the existence of this, if not create it`
+- `VISION_API_KEY`: Your Azure AI Vision API key 🡢 `Review the existence of this, if not create it`
+- `VISION_API_VERSION`: `2024-02-01` (Latest stable API version) 🡢 `Review the existence of this, if not create it`.  These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_ENDPOINT`: Your Azure OpenAI service endpoint 🡢 `Review the existence of this, if not create it`
+- `AZURE_OPENAI_KEY`: Your Azure OpenAI API key 🡢 `Review the existence of this, if not create it`
+- `AZURE_OPENAI_API_VERSION`: e.g `2025-04-14`  🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_GPT4_DEPLOYMENT`: Your e.g GPT-4 deployment name for complex reasoning and analysis 🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_GPT4O_DEPLOYMENT`: Your e.g GPT-4o deployment name for advanced multimodal processing 🡢 `Review the existence of this, if not create it`. These values depend on the specific you choose and deploy
+- `AZURE_OPENAI_EMBEDDING_DEPLOYMENT`: Your text embedding deployment name for semantic search 🡢 `Review the existence of this, if not create it`
+- `AI_HUB_NAME`: Your AI Studio Hub name for model management 🡢 `Review the existence of this, if not create it`
+- `AI_PROJECT_NAME`: Your AI Studio Project name 🡢 `Review the existence of this, if not create it`
+- `AI_HUB_WORKSPACE_URL`: Your AI Hub workspace URL 🡢 `Review the existence of this, if not create it`
+- `AI_PROJECT_WORKSPACE_URL`: Your AI Project workspace URL 🡢 `Review the existence of this, if not create it`
+- `AI_STORAGE_ACCOUNT_NAME`: Your AI storage account name for model artifacts 🡢 `Review the existence of this, if not create it`
+- `AI_STORAGE_CONNECTION`: Your AI storage connection string 🡢 `Review the existence of this, if not create it`
+- `ENABLE_LLM_PROCESSING`: `true` (Enable LLM-powered PDF processing features) 🡢 `Review the existence of this, if not create it`
+- `LLM_MAX_TOKENS`: `4000` (Maximum tokens per request - adjust based on your model choice) 🡢 `Review the existence of this, if not create it`
+- `LLM_TEMPERATURE`: `0.1` (Low temperature for consistent extraction - adjust based on use case) 🡢 `Review the existence of this, if not create it`
+- `LLM_TIMEOUT_SECONDS`: `120` (Timeout for LLM requests - may need adjustment depending on model response time) 🡢 `Review the existence of this, if not create it`
 
 </details>
   
