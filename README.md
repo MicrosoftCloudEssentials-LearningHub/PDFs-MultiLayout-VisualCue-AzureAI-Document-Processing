@@ -27,7 +27,6 @@ Last updated: 2025-08-07
 <details>
 <summary><b>List of References</b> (Click to expand)</summary>
 
-
 - [Power Apps pricing](https://www.microsoft.com/en-us/power-platform/products/power-apps/)
 - [Create a Fabric data agent (preview)](https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent) `enables users to interact with data stored in lakehouses, warehouses, Power BI semantic models, and KQL databases using natural language queries`. Key prerequisites include having a paid Fabric capacity, enabling specific tenant settings, and ensuring data sources are accessible.
   - To create a data agent, users navigate to their workspace, select the data agent option, and configure it by adding `up to five data sources`. Users can ask questions in plain English, and the system translates these into structured queries (SQL, DAX, KQL) to retrieve data. The document outlines the process for creating, configuring, and sharing the data agent, including providing instructions and example queries to enhance performance.
