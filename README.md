@@ -27,6 +27,18 @@ Last updated: 2025-08-07
 <details>
 <summary><b>List of References</b> (Click to expand)</summary>
 
+
+- [Power Apps pricing](https://www.microsoft.com/en-us/power-platform/products/power-apps/)
+- [Create a Fabric data agent (preview)](https://learn.microsoft.com/en-us/fabric/data-science/how-to-create-data-agent) `enables users to interact with data stored in lakehouses, warehouses, Power BI semantic models, and KQL databases using natural language queries`. Key prerequisites include having a paid Fabric capacity, enabling specific tenant settings, and ensuring data sources are accessible.
+  - To create a data agent, users navigate to their workspace, select the data agent option, and configure it by adding `up to five data sources`. Users can ask questions in plain English, and the system translates these into structured queries (SQL, DAX, KQL) to retrieve data. The document outlines the process for creating, configuring, and sharing the data agent, including providing instructions and example queries to enhance performance.
+  - The data agent operates under the user’s Microsoft Entra ID permissions, ensuring secure access to data. `It does not support complex reasoning or advanced analytics, focusing instead on retrieving structured data based on user queries`. Users can publish their data agent for colleagues to use after testing its performance. We can extend this with [Extend your agent with Model Context Protocol](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp) allows users to connect to existing knowledge servers and data sources, providing access to resources, tools, and predefined prompts for specific tasks.
+
+      <img width="1898" height="995" alt="image" src="https://github.com/user-attachments/assets/3845e948-71be-4ce2-9eb6-94e52e51acde" />
+
+- [Document Processor](https://learn.microsoft.com/en-us/microsoft-copilot-studio/template-managed-document-processor) managed agent in Microsoft Copilot Studio. `E2E solution for document processing, including extraction, validation, human monitoring, and exporting to downstream applications. Users can upload a sample document and configure extraction without needing to label data or train custom models. The agent informs users of the processing status and allows for manual verification of extracted data in the Validation Station`. Key prerequisites include licenses for Copilot Studio and Power Platform, enabling the Power Apps component framework, and specific security roles and permissions. Limitations on document processing include file size (less than 25 MB), file types (PNG, JPG, JPEG, PDF), and a maximum of 50 pages. Users can set up the agent by creating connections with required services, configuring data fields for extraction, and creating validation rules. The agent can notify reviewers when validation fails, and users can interact with the agent via Microsoft Teams. Here is more about `setting up the agent, including uploading sample documents, defining validation rules, and selecting document sources.` [Use an autonomous agent in Copilot Studio for document processing](https://learn.microsoft.com/en-us/power-platform/architecture/reference-architectures/document-processing-agent)
+
+    <img width="1332" height="844" alt="image" src="https://github.com/user-attachments/assets/879c048d-1508-4ee1-a62f-1e1593b74f59" />
+    
 - [Solution Accelerator for AI Document Processor (ADP)](https://github.com/azure/ai-document-processor) - AI Factory
 
 | **Category**                  | **Details**                                                                                                                                                                                                 |
