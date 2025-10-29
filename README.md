@@ -8,7 +8,7 @@ Costa Rica
 [![GitHub](https://img.shields.io/badge/--181717?logo=github&logoColor=ffffff)](https://github.com/)
 [brown9804](https://github.com/brown9804)
 
-Last updated: 2025-09-17
+Last updated: 2025-10-29
 
 -----------------------------
 
@@ -40,21 +40,30 @@ Last updated: 2025-09-17
     
 - [Solution Accelerator for AI Document Processor (ADP)](https://github.com/azure/ai-document-processor) - AI Factory
 
-| **Category**                  | **Details**                                                                                                                                                                                                 |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Purpose**                  | Automate document processing using Azure services and LLMs. Extracts data from files (PDF, Word, MP3), processes via Azure OpenAI, and outputs structured insights (JSON/CSV) to blob storage.         |
-| **Infrastructure Provisioning** | Uses Bicep templates to deploy all required Azure resources. Automates setup of networking, identity, and access controls using RBAC and managed identities to ensure secure and scalable deployment. |
-| **Main Azure Resources**     | - **Azure Function App**: Hosts the orchestrator and activity functions using Durable Functions to manage the document processing workflow.<br>- **Azure Storage Account**: Stores input documents (bronze container) and output results (gold container). Also holds prompt configurations if UI is not deployed.<br>- **Azure Static Web App**: Provides a user-friendly interface for uploading files, editing prompts, and triggering workflows.<br>- **Azure OpenAI**: Processes extracted text using LLMs to generate structured summaries or insights.<br>- **Azure Cognitive Services**: Specifically uses Document Intelligence for OCR and text extraction from uploaded files.<br>- **Cosmos DB**: Stores prompt configurations when the frontend UI is enabled, allowing dynamic updates from the web interface.<br>- **Key Vault**: Securely stores secrets, keys, and credentials used by the Function App and other services.<br>- **Application Insights**: Enables monitoring, logging, and diagnostics for the Function App and other components.<br>- **App Service Plan**: Provides the compute resources for running the Function App.                                                                 |
-| **Pipeline Components**      | - `function_app.py`: Main orchestrator using Durable Functions chaining pattern.<br>- `activities/runDocIntel.py`: Extracts text from documents using Azure Document Intelligence.<br>- `activities/callAoai.py`: Sends extracted text and prompt to Azure OpenAI and receives structured JSON.<br>- `activities/writeToBlob.py`: Writes the final output to the gold container in blob storage. |
-| **Data Flow**                | 1. Upload document to bronze container<br>2. OCR via Document Intelligence<br>3. Send extracted text + prompt to Azure OpenAI<br>4. Receive structured JSON<br>5. Write output to gold container           |
-| **Frontend UI (Optional)**  | - Allows business users to upload files and edit prompts<br>- Prompts are stored in Cosmos DB<br>- Users can trigger workflows and view job status directly from the interface                             |
-| **Prompt Configuration**     | - Without UI: Prompts are stored in `prompts.yaml` file in blob storage<br>- With UI: Prompts are stored and managed in Cosmos DB via the web interface                                                  |
-| **Deployment Steps**         | 1. Fork and clone the GitHub repo<br>2. Run `az login`, `azd auth login`, `azd up`<br>3. Provide User Principal ID for RBAC setup<br>4. Choose whether to deploy frontend UI                              |
-| **Execution (Without UI)**   | - Update `prompts.yaml` with desired instructions<br>- Send POST request to `http_start` endpoint with blob metadata<br>- Monitor pipeline execution via Log Stream                                       |
-| **Execution (With UI)**      | - Upload files via web interface<br>- Edit system and user prompts<br>- Click "Start Workflow" to trigger pipeline<br>- View success/failure messages and job status                                     |
-| **Monitoring & Troubleshooting** | - Use Log Stream for real-time logs<br>- Use Log Analytics Workspace to query exceptions and performance metrics<br>- Use SSH console in Development Tools to inspect deployment logs and file system |
-| **Pre-Requisites**           | - Azure CLI<br>- Azure Developer CLI (azd)<br>- Node.js 18.x.x<br>- npm 9.x.x<br>- Python 3.11                                                                                                             |
-| **License**                  | MIT License – Free to use, modify, and distribute with attribution. No warranty provided.                                                                                                                  |
+    | **Category**                  | **Details**                                                                                                                                                                                                 |
+    |------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | **Purpose**                  | Automate document processing using Azure services and LLMs. Extracts data from files (PDF, Word, MP3), processes via Azure OpenAI, and outputs structured insights (JSON/CSV) to blob storage.         |
+    | **Infrastructure Provisioning** | Uses Bicep templates to deploy all required Azure resources. Automates setup of networking, identity, and access controls using RBAC and managed identities to ensure secure and scalable deployment. |
+    | **Main Azure Resources**     | - **Azure Function App**: Hosts the orchestrator and activity functions using Durable Functions to manage the document processing workflow.<br>- **Azure Storage Account**: Stores input documents (bronze container) and output results (gold container). Also holds prompt configurations if UI is not deployed.<br>- **Azure Static Web App**: Provides a user-friendly interface for uploading files, editing prompts, and triggering workflows.<br>- **Azure OpenAI**: Processes extracted text using LLMs to generate structured summaries or insights.<br>- **Azure Cognitive Services**: Specifically uses Document Intelligence for OCR and text extraction from uploaded files.<br>- **Cosmos DB**: Stores prompt configurations when the frontend UI is enabled, allowing dynamic updates from the web interface.<br>- **Key Vault**: Securely stores secrets, keys, and credentials used by the Function App and other services.<br>- **Application Insights**: Enables monitoring, logging, and diagnostics for the Function App and other components.<br>- **App Service Plan**: Provides the compute resources for running the Function App.                                                                 |
+    | **Pipeline Components**      | - `function_app.py`: Main orchestrator using Durable Functions chaining pattern.<br>- `activities/runDocIntel.py`: Extracts text from documents using Azure Document Intelligence.<br>- `activities/callAoai.py`: Sends extracted text and prompt to Azure OpenAI and receives structured JSON.<br>- `activities/writeToBlob.py`: Writes the final output to the gold container in blob storage. |
+    | **Data Flow**                | 1. Upload document to bronze container<br>2. OCR via Document Intelligence<br>3. Send extracted text + prompt to Azure OpenAI<br>4. Receive structured JSON<br>5. Write output to gold container           |
+    | **Frontend UI (Optional)**  | - Allows business users to upload files and edit prompts<br>- Prompts are stored in Cosmos DB<br>- Users can trigger workflows and view job status directly from the interface                             |
+    | **Prompt Configuration**     | - Without UI: Prompts are stored in `prompts.yaml` file in blob storage<br>- With UI: Prompts are stored and managed in Cosmos DB via the web interface                                                  |
+    | **Deployment Steps**         | 1. Fork and clone the GitHub repo<br>2. Run `az login`, `azd auth login`, `azd up`<br>3. Provide User Principal ID for RBAC setup<br>4. Choose whether to deploy frontend UI                              |
+    | **Execution (Without UI)**   | - Update `prompts.yaml` with desired instructions<br>- Send POST request to `http_start` endpoint with blob metadata<br>- Monitor pipeline execution via Log Stream                                       |
+    | **Execution (With UI)**      | - Upload files via web interface<br>- Edit system and user prompts<br>- Click "Start Workflow" to trigger pipeline<br>- View success/failure messages and job status                                     |
+    | **Monitoring & Troubleshooting** | - Use Log Stream for real-time logs<br>- Use Log Analytics Workspace to query exceptions and performance metrics<br>- Use SSH console in Development Tools to inspect deployment logs and file system |
+    | **Pre-Requisites**           | - Azure CLI<br>- Azure Developer CLI (azd)<br>- Node.js 18.x.x<br>- npm 9.x.x<br>- Python 3.11                                                                                                             |
+    | **License**                  | MIT License – Free to use, modify, and distribute with attribution. No warranty provided.                                                                                                                  |
+
+    <img width="835" height="535" alt="image" src="https://github.com/user-attachments/assets/61dbac57-f635-4dd6-9292-50e51823a8c4" />
+    
+    > Data flow: 
+    
+    <img width="930" height="620" alt="image" src="https://github.com/user-attachments/assets/2f01a07b-71cd-4ee9-b316-c0a2273d01b2" />
+
+    > ZTA:
+    <img width="1840" height="935" alt="image" src="https://github.com/user-attachments/assets/947ddf0d-daf3-4df3-949c-1271a3fef7bb" />
 
 - [Use Azure AI services with SynapseML in Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/data-science/how-to-use-ai-services-with-synapseml)
 - [Plan and manage costs for Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/costs-plan-manage)
@@ -528,7 +537,7 @@ Last updated: 2025-09-17
 
 <!-- START BADGE -->
 <div align="center">
-  <img src="https://img.shields.io/badge/Total%20views-1292-limegreen" alt="Total views">
-  <p>Refresh Date: 2025-09-17</p>
+  <img src="https://img.shields.io/badge/Total%20views-1297-limegreen" alt="Total views">
+  <p>Refresh Date: 2025-10-29</p>
 </div>
 <!-- END BADGE -->
