@@ -4,13 +4,15 @@
 
 Costa Rica
 
-[![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com)
 [![GitHub](https://img.shields.io/badge/--181717?logo=github&logoColor=ffffff)](https://github.com/)
 [brown9804](https://github.com/brown9804)
 
 Last updated: 2025-10-29
 
 -----------------------------
+
+> [!NOTE]
+> A landing zone is a general `cloud framework that sets up the core structure for all workloads`. Each use case (like an app, data pipeline, or API) then builds on top of this framework, using the `same environments (Dev → Test → UAT → Prod) and CI/CD pipelines to move code safely into production.` It’s general by design, but `applied per use case.`
 
 > This solution is designed to be flexible and robust, supporting multiple versions of PDF documents with varying layouts, including those that use visual selection cues such as gray fills, hand-drawn Xs, checkmarks, or circles. By building on the [PDFs-Layouts-Processing-Fapp-DocIntelligence](https://github.com/MicrosoftCloudEssentials-LearningHub/PDFs-Layouts-Processing-Fapp-DocIntelligence) repository, modular approach aiming to:
 
